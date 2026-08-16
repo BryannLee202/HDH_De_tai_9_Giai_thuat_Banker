@@ -1,0 +1,39 @@
+# ----- Python -----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.coverage
+
+# ----- Dong goi PyInstaller -----
+build/
+dist/
+*.spec
+
+# ----- File tam cua Microsoft Office -----
+# Word/Excel tao file khoa an bat dau bang ~$ moi khi mo tai lieu.
+# Rat hay bi commit nham va gay xung dot vo nghia.
+~$*
+*.tmp
+
+# ----- He dieu hanh -----
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# ----- Trinh soan thao -----
+.vscode/
+.idea/
+
+# ----- File nang: KHONG commit -----
+# GitHub chan file tren 100 MB. Video demo cua TV6 de tren Google Drive,
+# dan link vao muc "Video demo" trong README.md.
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.zip
+*.rar
