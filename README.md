@@ -22,10 +22,10 @@ Kế hoạch phân công đầy đủ: [`docs/Phan-cong-De-tai-9-Giai-thuat-Bank
 | TV2 | *Nguyễn Đức Khải* | Chương lý thuyết Deadlock | `tv2-chuong-ly-thuyet` | `report/chuong-1-tv2/` |
 | TV3 | — | Đặc tả thuật toán · mã giả · chạy tay | `tv3-dac-ta-thuat-toan` | `report/chuong-2-tv3/` |
 | TV4 | *Nguyễn Minh Trí* | Engine — mã nguồn lõi | `tv4-engine` | `engine/` |
-| TV5 | — | Giao diện — nhập liệu và dữ liệu | `tv5-gui-nhap-lieu` | `gui/`, `data/` |
+| TV5 |  Trần Đức Tân | Giao diện — nhập liệu và dữ liệu | `tv5-gui-nhap-lieu` | `gui/`, `data/` |
 | TV6 | *Nguyễn Thái* | Giao diện — mô phỏng và trực quan | `tv6-gui-mo-phong` | `gui/` |
 | TV7 | *Văn Hoàng* | Chương so sánh hai giải thuật | `tv7-chuong-so-sanh` | `report/chuong-3-tv7/` |
-| TV8 | — | Kiểm thử · chương kết quả · phản biện | `tv8-kiem-thu` | `tests/`, `report/chuong-5-tv8/` |
+| TV8 | Nguyễn Thảo| Kiểm thử · chương kết quả · phản biện | `tv8-kiem-thu` | `tests/`, `report/chuong-5-tv8/` |
 
 ---
 
