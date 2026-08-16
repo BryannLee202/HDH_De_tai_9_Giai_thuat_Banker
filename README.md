@@ -143,19 +143,21 @@ git config --global user.email "email-github-cua-ban@gmail.com"
 ### Bước 2 — Tải repo về máy
 
 ```bash
-git clone <đường-dẫn-repo> && cd HDH
+git clone https://github.com/BryannLee202/HDH_De_tai_9_Giai_thuat_Banker.git
 ```
 
 ### Bước 3 — Sang nhánh của mình
 
+Tám nhánh đã được tạo sẵn trên GitHub, nên **không dùng `-b`** — chỉ cần chuyển sang là Git tự nối với nhánh trên mạng:
+
 ```bash
-git checkout -b tv4-engine
+git checkout tv4-engine
 ```
 
 ### Bước 4 — Làm việc, rồi lưu lên
 
 ```bash
-git add . && git commit -m "TV4: cai dat ham is_safe" && git push -u origin tv4-engine
+git add . && git commit -m "TV4: cai dat ham kiem_tra_an_toan" && git push
 ```
 
 ### Bước 5 — Tạo pull request
