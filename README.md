@@ -109,6 +109,79 @@ Kế hoạch phân công đầy đủ: [`docs/Phan-cong-De-tai-9-Giai-thuat-Bank
 
 ---
 
+## Tài liệu học theo vai trò
+
+### Dùng chung cho cả 8 người
+
+| Tài liệu | Ở đâu |
+|---|---|
+| Kế hoạch phân công đầy đủ (có mã giả, bộ test, khung so sánh) | `docs/Phan-cong-De-tai-9-Giai-thuat-Banker.pdf` — **mục 03 là phần ai cũng phải nắm** |
+| Ảnh đề bài gốc | `docs/de-bai/de-bai-goc.jpg` |
+| Silberschatz, Galvin, Gagne — *Operating System Concepts*, chương **Deadlocks** | https://www.os-book.com — sách gốc của toàn bộ đề tài này |
+| Slide bài giảng của thầy | Nguồn sát đề nhất. Nếu ký hiệu trong slide khác sách thì **theo slide**, vì thầy chấm theo đó |
+
+### TV1 — Nhóm trưởng · Kiến trúc
+
+- **Trong repo:** `engine/banker_types.py` — file bạn sở hữu, đã chạy được; đọc để giải thích cho TV4, TV5, TV6 khi họ hỏi
+- Nhánh và pull request trên GitHub — https://docs.github.com/en/pull-requests
+- Vẽ UML — https://app.diagrams.net (menu **Shape → UML** có sẵn mẫu biểu đồ lớp, ca sử dụng, tuần tự)
+- Xuất Excel — https://openpyxl.readthedocs.io · Xuất PDF — https://docs.reportlab.com
+- Đóng gói file chạy — https://pyinstaller.org/en/stable/
+- Word mục lục tự động: thẻ **References → Table of Contents**; đánh số hình: **Insert Caption**
+
+### TV2 — Chương lý thuyết
+
+- Silberschatz, chương Deadlocks, **các mục đầu**: mô hình hệ thống, 4 điều kiện Coffman, 4 hướng xử lý
+- Bài toán 5 triết gia nằm ở chương **Synchronization** của cùng cuốn sách, không nằm ở chương Deadlocks
+- Vẽ hình — https://app.diagrams.net (nhớ lưu cả file nguồn `.drawio` để chứng minh tự vẽ)
+- Cách trích dẫn: chọn một chuẩn duy nhất (IEEE hoặc APA) rồi dùng **References → Insert Citation** của Word
+
+### TV3 — Đặc tả thuật toán *(ưu tiên số 1)*
+
+- **Quan trọng nhất, trong repo:** `engine/banker.py` — **mã giả đầy đủ của cả hai thủ tục đã nằm sẵn trong phần chú thích của từng hàm**. Bạn không phải tra sách, chỉ cần viết lại cho đầy đủ và giải thích trong Word
+- **Trong repo:** `tests/test_banker.py` — 16 ca kiểm thử với kết quả kỳ vọng cụ thể. Đây chính là những con số bạn phải chạy tay ra được
+- Silberschatz, mục **Banker's Algorithm** — phần Safety Algorithm và Resource-Request Algorithm
+- Ví dụ chuẩn 5 tiến trình × 3 tài nguyên: `data/vi-du-chuan.json`
+
+### TV4 — Engine
+
+- **Trong repo, theo thứ tự đọc:** `engine/banker_types.py` (hợp đồng dữ liệu) → `engine/banker.py` (mã giả trong chú thích) → `tests/test_banker.py` (đặc tả bạn phải thoả)
+- Kiểu dữ liệu dataclass — https://docs.python.org/3/library/dataclasses.html
+- **Sao chép sâu** — https://docs.python.org/3/library/copy.html · thiếu kiến thức này là hỏng bước rollback
+- Kiểm thử — https://docs.python.org/3/library/unittest.html
+
+### TV5 — Giao diện nhập liệu
+
+- Tài liệu PyQt5 — https://www.riverbankcomputing.com/static/Docs/PyQt5/
+- Bảng dữ liệu `QTableWidget` — https://doc.qt.io/qt-5/qtablewidget.html
+- Ô nhập số `QSpinBox`, hộp thoại chọn file `QFileDialog` — tra cùng trang doc.qt.io
+- Đọc ghi JSON — https://docs.python.org/3/library/json.html
+- **Trong repo:** 3 file trong `data/` chính là định dạng bạn phải đọc và ghi. `banker_types.py` **đã có sẵn** `from_json_file()` và `to_json_file()` — đừng viết lại
+
+### TV6 — Giao diện mô phỏng
+
+- Bộ đếm thời gian `QTimer` cho chế độ chạy tự động — https://doc.qt.io/qt-5/qtimer.html
+- Tô màu ô bảng: dùng `QTableWidgetItem.setBackground()`
+- Thanh trượt tốc độ `QSlider` — https://doc.qt.io/qt-5/qslider.html
+- Vẽ biểu đồ — https://matplotlib.org/stable/ (tìm mục nhúng matplotlib vào Qt)
+- **Trong repo:** lớp `StepLog` trong `banker_types.py` chính là cấu trúc các cột của bảng nhật ký. Cứ theo đó mà dựng bảng
+
+### TV7 — Chương so sánh
+
+- Silberschatz, mục **Resource-Allocation Graph** — phần lý thuyết đồ thị và phần dùng đồ thị để tránh deadlock (có cạnh nhu cầu nét đứt)
+- Kiến thức nền: phát hiện chu trình trong đồ thị có hướng
+- Vẽ đồ thị — https://app.diagrams.net · Vẽ biểu đồ số liệu: Excel cũng được, không bắt buộc dùng code
+- **Trong repo:** xin TV4 script đo thời gian và TV5 nút sinh dữ liệu ngẫu nhiên. Số liệu phải đo thật
+
+### TV8 — Kiểm thử
+
+- **Trong repo:** `tests/test_banker.py` — 16 ca đã viết sẵn, đọc để học cách viết thêm ca mới
+- Thư viện kiểm thử — https://docs.python.org/3/library/unittest.html
+- Báo lỗi bằng GitHub Issues — https://docs.github.com/en/issues
+- Giá trị kỳ vọng **lấy từ bảng chạy tay của TV3**, không tự suy đoán và không sửa test cho khớp với code
+
+---
+
 ## Cấu trúc thư mục
 
 ```
