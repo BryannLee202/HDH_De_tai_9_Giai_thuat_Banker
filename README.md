@@ -14,188 +14,121 @@ Kế hoạch phân công đầy đủ: [`docs/Phan-cong-De-tai-9-Giai-thuat-Bank
 
 ---
 
-## Phân công và nhánh làm việc
+## Tiến độ
 
-| TV | Họ tên | Nhiệm vụ | Nhánh | Thư mục sở hữu |
+| TV | Họ tên | Nhiệm vụ | Nhánh | Trạng thái |
 |---|---|---|---|---|
-| TV1 | *Lê Minh Tài* | Nhóm trưởng · hợp đồng dữ liệu · kiến trúc · module xuất báo cáo | `tv1-kien-truc` | `engine/banker_types.py`, `docs/`, `report/chuong-4-tv1/` |
-| TV2 | *Nguyễn Đức Khải* | Chương lý thuyết Deadlock | `tv2-chuong-ly-thuyet` | `report/chuong-1-tv2/` |
-| TV3 | Đặng Hoàng Phong | Đặc tả thuật toán · mã giả · chạy tay | `tv3-dac-ta-thuat-toan` | `report/chuong-2-tv3/` |
-| TV4 | *Nguyễn Minh Trí* | Engine — mã nguồn lõi | `tv4-engine` | `engine/` |
-| TV5 |  Trần Đức Tân | Giao diện — nhập liệu và dữ liệu | `tv5-gui-nhap-lieu` | `gui/`, `data/` |
-| TV6 | *Nguyễn Thái* | Giao diện — mô phỏng và trực quan | `tv6-gui-mo-phong` | `gui/` |
-| TV7 | *Văn Hoàng* | Chương so sánh hai giải thuật | `tv7-chuong-so-sanh` | `report/chuong-3-tv7/` |
-| TV8 | Võ Nguyên Thảo| Kiểm thử · chương kết quả · phản biện | `tv8-kiem-thu` | `tests/`, `report/chuong-5-tv8/` |
+| TV1 | Lê Minh Tài | Nhóm trưởng · hợp đồng dữ liệu · kiến trúc · xuất báo cáo | `tv1-kien-truc` | ✅ Xong |
+| TV2 | Nguyễn Đức Khải | Chương 1 — lý thuyết Deadlock | `tv2-chuong-ly-thuyet` | ⬜ Chưa nộp |
+| TV3 | Đặng Hoàng Phong | Chương 2 — đặc tả thuật toán | `tv3-dac-ta-thuat-toan` | ✅ Xong |
+| TV4 | Nguyễn Minh Trí | Engine — mã nguồn lõi | `tv4-engine` | ✅ Xong |
+| TV5 | Trần Đức Tân | Giao diện — nhập liệu và dữ liệu | `tv5-gui-nhap-lieu` | 🟡 Chạy được, cần hoàn thiện |
+| TV6 | Nguyễn Thái | Giao diện — mô phỏng và trực quan | `tv6-gui-mo-phong` | 🟡 Chạy được, cần hoàn thiện |
+| TV7 | Văn Hoàng | Chương 3 — so sánh hai giải thuật | `tv7-chuong-so-sanh` | ⬜ Chưa nộp — **đã có sẵn số liệu đo** |
+| TV8 | Võ Nguyên Thảo | Chương 5 — kiểm thử và kết quả | `tv8-kiem-thu` | ⬜ Chưa nộp — 17 test đã chạy xanh |
 
 ---
 
-## Bảng làm việc chi tiết
+## Chạy chương trình
 
-### TV1 — Nhóm trưởng · Kiến trúc phần mềm · nhánh `tv1-kien-truc` · **có code**
+Cài thư viện giao diện (chỉ TV5, TV6 cần):
 
-**Kiến thức cần có:** Git nâng cao (nhánh, pull request, gộp mã) · UML (sơ đồ khối, ca sử dụng, biểu đồ lớp, biểu đồ tuần tự) · Python mức đọc ghi file và xuất PDF · Word (mục lục tự động, đánh số hình theo chương).
+```bash
+pip install PyQt5
+```
 
-1. `git clone` rồi `git checkout tv1-kien-truc`
-2. Điền tên 8 người vào bảng phân công phía trên
-3. Vẽ 4 biểu đồ thiết kế bằng draw.io, lưu vào `docs/`
-4. Viết module xuất báo cáo PDF/Excel trong `gui/`
-5. Commit, push, mở pull request
-6. Duyệt pull request của 7 người còn lại — **chỉ TV1 được bấm Merge**
+Chạy phần mềm:
 
-### TV2 — Chương lý thuyết Deadlock · nhánh `tv2-chuong-ly-thuyet` · **không code**
+```bash
+python -m gui.GUI_TV6
+```
 
-**Kiến thức cần có:** 4 điều kiện Coffman · 4 hướng xử lý deadlock · phân biệt deadlock / starvation / livelock · bài toán 5 triết gia và khoá chéo semaphore · draw.io · cách trích dẫn tài liệu.
+Chạy engine từ dòng lệnh, không cần giao diện:
 
-**Không cần cài đặt gì.** Vào repo trên web → đổi nhánh sang `tv2-chuong-ly-thuyet` → mở `report/chuong-1-tv2/` → **Add file → Upload files** → kéo `chuong-1.docx` vào → gõ mô tả → **Commit changes**.
+```bash
+python -m engine.demo
+```
 
-### TV3 — Đặc tả thuật toán · nhánh `tv3-dac-ta-thuat-toan` · **không code** *(ưu tiên số 1)*
+Kết quả mong đợi với bộ dữ liệu chuẩn: **AN TOÀN**, chuỗi `P1 → P3 → P0 → P2 → P4`, `Work` cuối `(10, 5, 7)`.
 
-**Kiến thức cần có:** phải nắm thuật toán Banker **chắc hơn cả người viết code** — hai thủ tục kiểm tra an toàn và xử lý yêu cầu, phép so sánh vector theo từng thành phần, cách tính độ phức tạp `O(m·n²)`, và chạy tay ma trận không sai số.
+Chạy kiểm thử:
 
-**Không cần cài đặt gì**, upload qua web như TV2 vào `report/chuong-2-tv3/`. File `chuong-2.docx` bắt buộc phải có: mã giả 2 thủ tục, lưu đồ, **bảng chạy tay đủ 5 vòng lặp**, và 3 kịch bản yêu cầu với 3 lý do khác nhau. Sau đó họp 30 phút bàn giao mã giả cho TV4.
+```bash
+python -m unittest discover -s tests -v
+```
 
-### TV4 — Engine · nhánh `tv4-engine` · **có code, nhiều nhất**
+Đo hiệu năng, xuất CSV cho TV7:
 
-**Kiến thức cần có:** Python (lớp, dataclass, mảng hai chiều, ngoại lệ) · **sao chép sâu** — thiếu kiến thức này là hỏng bước rollback · thư viện `unittest` · hiểu mã giả của TV3.
-
-1. `git checkout tv4-engine`
-2. Chạy `python -m unittest discover -s tests -v` → thấy 16 test đỏ, đó là danh sách việc
-3. Mở `engine/banker.py`, thay từng chỗ `TODO` bằng code thật
-4. Thứ tự: `kiem_tra_hop_le` → `kiem_tra_an_toan` → `yeu_cau_tai_nguyen` → `giai_phong` → `tat_ca_chuoi_an_toan`
-5. Mỗi hàm xong là một commit
-6. Xong khi cả 16 test xanh
-
-### TV5 — Giao diện nhập liệu · nhánh `tv5-gui-nhap-lieu` · **có code**
-
-**Kiến thức cần có:** PyQt5 (bảng dữ liệu, ô nhập số, hộp thoại chọn file) · bắt sự kiện khi người dùng gõ để kiểm tra ngay · đọc ghi JSON · sinh số ngẫu nhiên có ràng buộc.
-
-1. `git checkout tv5-gui-nhap-lieu`
-2. **Họp với TV6 chốt bố cục hai vùng trước khi viết dòng code nào**
-3. Tạo `gui/cua_so_chinh.py`, dựng khung cửa sổ
-4. Làm lưới nhập, kiểm tra hợp lệ, tính `Need`
-5. Làm menu Mở / Lưu, nạp 3 bộ mẫu trong `data/`
-
-### TV6 — Giao diện mô phỏng · nhánh `tv6-gui-mo-phong` · **có code**
-
-**Kiến thức cần có:** PyQt5 (bảng, bộ đếm thời gian, tín hiệu và khe cắm) · tô màu và tô sáng ô trong bảng · vẽ hình bằng matplotlib hoặc vẽ tay · ngăn xếp lịch sử để làm nút Hoàn tác.
-
-1. `git checkout tv6-gui-mo-phong`
-2. Tuần 1 dựng bảng nhật ký với dữ liệu giả, **không cần chờ TV4**
-3. Ghép engine thật khi TV4 xong
-4. Làm chạy từng bước, chạy tự động, panel yêu cầu tài nguyên
-5. Làm nút Kết thúc tiến trình và Hoàn tác
-6. Quay video demo — **để trên Google Drive, không commit vào repo**
-
-### TV7 — Chương so sánh · nhánh `tv7-chuong-so-sanh` · **code ít**
-
-**Kiến thức cần có:** giải thuật đồ thị phân bổ tài nguyên và ba loại cạnh · phát hiện chu trình trong đồ thị có hướng · **vì sao có chu trình chưa chắc đã deadlock** · vẽ biểu đồ bằng Excel hoặc matplotlib.
-
-1. Vẽ 2 hình đồ thị đối chứng bằng draw.io
-2. Lập bảng so sánh 7 tiêu chí, viết lời bình cho **từng dòng**
-3. Chạy script đo của TV4 với `n` = 10, 20, 50, 100, 200
-4. Vẽ biểu đồ thời gian, đối chiếu với đường cong `n²`
-5. Upload `chuong-3.docx` vào `report/chuong-3-tv7/`
-
-### TV8 — Kiểm thử · nhánh `tv8-kiem-thu` · **có code, mức nhẹ**
-
-**Kiến thức cần có:** cách viết một ca kiểm thử (đầu vào — kỳ vọng — thực tế) · `unittest` ở mức đọc hiểu và thêm ca mới · GitHub Issues · chụp màn hình và trình bày bảng kết quả.
-
-1. `git checkout tv8-kiem-thu`
-2. Đọc 16 ca có sẵn trong `tests/test_banker.py`
-3. Thêm tối thiểu 5 ca của riêng mình
-4. Chạy phần mềm thật, chụp màn hình từng ca
-5. Mỗi lỗi mở một issue, theo dõi đến khi đóng
-6. Upload `chuong-5.docx` và soạn 15 câu hỏi phản biện
+```bash
+python -m scripts.do_hieu_nang
+```
 
 ---
 
-## Tài liệu học theo vai trò
+## API của engine — đọc trước khi viết bất kỳ dòng nào
 
-### Dùng chung cho cả 8 người
+> **Quan trọng nhất trong README này.** Đã từng có ba bộ tên hàm khác nhau cùng tồn tại trong dự án, khiến giao diện gọi một engine không hề tồn tại và chương trình bung ngay khi khởi động. Giờ tất cả đi qua **một API duy nhất**. Đừng tự tạo module engine khác.
 
-| Tài liệu | Ở đâu |
+```python
+from engine.banker_types import BankerState, Verdict, LoiDuLieu
+from engine.banker import (
+    kiem_tra_hop_le,        # ném LoiDuLieu nếu dữ liệu sai
+    kiem_tra_an_toan,       # -> SafetyResult
+    yeu_cau_tai_nguyen,     # -> RequestResult
+    giai_phong,
+    ket_thuc_tien_trinh,
+    tat_ca_chuoi_an_toan,
+)
+
+tt = BankerState.from_json_file("data/vi-du-chuan.json")
+kq = kiem_tra_an_toan(tt)
+print(kq.an_toan, kq.chuoi_dep())      # True  'P1 → P3 → P0 → P2 → P4'
+
+r = yeu_cau_tai_nguyen(tt, 1, [1, 0, 2])
+print(r.ket_luan, r.ly_do)             # Verdict.CAP_PHAT  'Cấp phát: ...'
+```
+
+**Kiểu dữ liệu trả về**
+
+| Lớp | Trường |
 |---|---|
-| Kế hoạch phân công đầy đủ (có mã giả, bộ test, khung so sánh) | `docs/Phan-cong-De-tai-9-Giai-thuat-Banker.pdf` — **mục 03 là phần ai cũng phải nắm** |
-| Ảnh đề bài gốc | `docs/de-bai/de-bai-goc.jpg` |
-| Silberschatz, Galvin, Gagne — *Operating System Concepts*, chương **Deadlocks** | https://www.os-book.com — sách gốc của toàn bộ đề tài này |
-| Slide bài giảng của thầy | Nguồn sát đề nhất. Nếu ký hiệu trong slide khác sách thì **theo slide**, vì thầy chấm theo đó |
+| `BankerState` | `available`, `max`, `allocation`, `need` (tự tính), `total`, `n`, `m`, `copy()` |
+| `SafetyResult` | `an_toan`, `chuoi`, `nhat_ky` (danh sách `StepLog`), `treo`, `chuoi_dep()` |
+| `StepLog` | `buoc`, `work_truoc`, `tien_trinh`, `need`, `allocation`, `work_sau`, `bo_qua` |
+| `RequestResult` | `ket_luan` (`Verdict`), `ly_do`, `nhat_ky` |
+| `Verdict` | `CAP_PHAT`, `CHO`, `LOI` |
 
-### TV1 — Nhóm trưởng · Kiến trúc
+**Hai điều đừng làm**
 
-- **Trong repo:** `engine/banker_types.py` — file bạn sở hữu, đã chạy được; đọc để giải thích cho TV4, TV5, TV6 khi họ hỏi
-- Nhánh và pull request trên GitHub — https://docs.github.com/en/pull-requests
-- Vẽ UML — https://app.diagrams.net (menu **Shape → UML** có sẵn mẫu biểu đồ lớp, ca sử dụng, tuần tự)
-- Xuất Excel — https://openpyxl.readthedocs.io · Xuất PDF — https://docs.reportlab.com
-- Đóng gói file chạy — https://pyinstaller.org/en/stable/
-- Word mục lục tự động: thẻ **References → Table of Contents**; đánh số hình: **Insert Caption**
+- Đừng tự tính `Need` rồi lưu lại. `BankerState.need` tự tính từ `max − allocation` mỗi lần đọc nên không bao giờ lệch.
+- Đừng import PyQt hay tkinter vào `engine/`. Engine phải chạy được từ dòng lệnh để TV8 kiểm thử tự động.
 
-### TV2 — Chương lý thuyết
-
-- Silberschatz, chương Deadlocks, **các mục đầu**: mô hình hệ thống, 4 điều kiện Coffman, 4 hướng xử lý
-- Bài toán 5 triết gia nằm ở chương **Synchronization** của cùng cuốn sách, không nằm ở chương Deadlocks
-- Vẽ hình — https://app.diagrams.net (nhớ lưu cả file nguồn `.drawio` để chứng minh tự vẽ)
-- Cách trích dẫn: chọn một chuẩn duy nhất (IEEE hoặc APA) rồi dùng **References → Insert Citation** của Word
-
-### TV3 — Đặc tả thuật toán *(ưu tiên số 1)*
-
-- **Quan trọng nhất, trong repo:** `engine/banker.py` — **mã giả đầy đủ của cả hai thủ tục đã nằm sẵn trong phần chú thích của từng hàm**. Bạn không phải tra sách, chỉ cần viết lại cho đầy đủ và giải thích trong Word
-- **Trong repo:** `tests/test_banker.py` — 16 ca kiểm thử với kết quả kỳ vọng cụ thể. Đây chính là những con số bạn phải chạy tay ra được
-- Silberschatz, mục **Banker's Algorithm** — phần Safety Algorithm và Resource-Request Algorithm
-- Ví dụ chuẩn 5 tiến trình × 3 tài nguyên: `data/vi-du-chuan.json`
-
-### TV4 — Engine
-
-- **Trong repo, theo thứ tự đọc:** `engine/banker_types.py` (hợp đồng dữ liệu) → `engine/banker.py` (mã giả trong chú thích) → `tests/test_banker.py` (đặc tả bạn phải thoả)
-- Kiểu dữ liệu dataclass — https://docs.python.org/3/library/dataclasses.html
-- **Sao chép sâu** — https://docs.python.org/3/library/copy.html · thiếu kiến thức này là hỏng bước rollback
-- Kiểm thử — https://docs.python.org/3/library/unittest.html
-
-### TV5 — Giao diện nhập liệu
-
-- Tài liệu PyQt5 — https://www.riverbankcomputing.com/static/Docs/PyQt5/
-- Bảng dữ liệu `QTableWidget` — https://doc.qt.io/qt-5/qtablewidget.html
-- Ô nhập số `QSpinBox`, hộp thoại chọn file `QFileDialog` — tra cùng trang doc.qt.io
-- Đọc ghi JSON — https://docs.python.org/3/library/json.html
-- **Trong repo:** 3 file trong `data/` chính là định dạng bạn phải đọc và ghi. `banker_types.py` **đã có sẵn** `from_json_file()` và `to_json_file()` — đừng viết lại
-
-### TV6 — Giao diện mô phỏng
-
-- Bộ đếm thời gian `QTimer` cho chế độ chạy tự động — https://doc.qt.io/qt-5/qtimer.html
-- Tô màu ô bảng: dùng `QTableWidgetItem.setBackground()`
-- Thanh trượt tốc độ `QSlider` — https://doc.qt.io/qt-5/qslider.html
-- Vẽ biểu đồ — https://matplotlib.org/stable/ (tìm mục nhúng matplotlib vào Qt)
-- **Trong repo:** lớp `StepLog` trong `banker_types.py` chính là cấu trúc các cột của bảng nhật ký. Cứ theo đó mà dựng bảng
-
-### TV7 — Chương so sánh
-
-- Silberschatz, mục **Resource-Allocation Graph** — phần lý thuyết đồ thị và phần dùng đồ thị để tránh deadlock (có cạnh nhu cầu nét đứt)
-- Kiến thức nền: phát hiện chu trình trong đồ thị có hướng
-- Vẽ đồ thị — https://app.diagrams.net · Vẽ biểu đồ số liệu: Excel cũng được, không bắt buộc dùng code
-- **Trong repo:** xin TV4 script đo thời gian và TV5 nút sinh dữ liệu ngẫu nhiên. Số liệu phải đo thật
-
-### TV8 — Kiểm thử
-
-- **Trong repo:** `tests/test_banker.py` — 16 ca đã viết sẵn, đọc để học cách viết thêm ca mới
-- Thư viện kiểm thử — https://docs.python.org/3/library/unittest.html
-- Báo lỗi bằng GitHub Issues — https://docs.github.com/en/issues
-- Giá trị kỳ vọng **lấy từ bảng chạy tay của TV3**, không tự suy đoán và không sửa test cho khớp với code
+Giao diện không gọi thẳng engine mà đi qua [`gui/engine_adapter.py`](gui/engine_adapter.py) — nếu engine đổi thì chỉ phải sửa một chỗ.
 
 ---
 
 ## Cấu trúc thư mục
 
 ```
-engine/    Thuật toán Banker, không phụ thuộc giao diện
-gui/       Giao diện phần mềm
-tests/     Kiểm thử tự động
-data/      Bộ dữ liệu mẫu .json
-docs/      Đề bài, kế hoạch, biểu đồ thiết kế
+engine/    Thuật toán Banker, không phụ thuộc giao diện        TV4
+  banker_types.py   Hợp đồng dữ liệu dùng chung                TV1
+  banker.py         Hai thủ tục chính của giải thuật           TV4
+  demo.py           Chạy thử từ dòng lệnh                      TV4
+gui/       Giao diện phần mềm                                  TV5, TV6
+  GUI_TV6.py        Cửa sổ chính, nhập liệu, mô phỏng          TV5, TV6
+  bang_yeu_cau.py   Yêu cầu, giải phóng, hoàn tác, biểu đồ     TV6
+  engine_adapter.py Cầu nối giữa engine và giao diện           TV6
+  xuat_bao_cao.py   Xuất kết quả ra HTML / Excel               TV1
+scripts/   Đo hiệu năng, xuất CSV cho Chương 3                 TV4
+tests/     Kiểm thử tự động — 17 ca                            TV8
+data/      3 bộ dữ liệu mẫu .json                              TV5
+docs/      Đề bài, kế hoạch, kiến trúc chương trình            TV1
 report/    Quyển báo cáo — mỗi chương một thư mục riêng
 ```
 
 **Quy tắc quan trọng nhất:** mỗi thư mục có đúng một chủ sở hữu, và **chỉ chủ sở hữu được sửa file bên trong**.
 
-File Word là file nhị phân — Git không merge được. Hai người cùng sửa một file `.docx` sẽ tạo ra xung đột không gỡ được, buộc phải bỏ hẳn một bản. Chia thư mục theo người là cách duy nhất để chuyện đó không bao giờ xảy ra.
+File Word là file nhị phân — Git không merge được. Hai người cùng sửa một file `.docx` sẽ tạo ra xung đột không gỡ được, buộc phải bỏ hẳn một bản.
 
 ---
 
@@ -203,7 +136,7 @@ File Word là file nhị phân — Git không merge được. Hai người cùng
 
 ### Bước 1 — Khai báo danh tính (làm một lần, trên máy của chính mình)
 
-Email phải **trùng với email đăng ký GitHub**, nếu không commit sẽ không gắn được vào tài khoản của bạn và không hiện trong biểu đồ đóng góp — đúng thứ giáo viên nhìn vào để đánh giá.
+Email phải **trùng với email đăng ký GitHub của bạn**. Nếu sai, commit không gắn được vào tài khoản và biểu đồ đóng góp sẽ trống — đúng thứ giáo viên nhìn để đánh giá.
 
 ```bash
 git config --global user.name "Họ Tên Thật"
@@ -221,21 +154,27 @@ git clone https://github.com/BryannLee202/HDH_De_tai_9_Giai_thuat_Banker.git
 
 ### Bước 3 — Sang nhánh của mình
 
-Tám nhánh đã được tạo sẵn trên GitHub, nên **không dùng `-b`** — chỉ cần chuyển sang là Git tự nối với nhánh trên mạng:
+Tám nhánh đã tạo sẵn nên **không dùng `-b`**. Repo cũng đang chặn tạo nhánh mới, gõ `git checkout -b` sẽ bị từ chối — đó không phải lỗi Git.
 
 ```bash
 git checkout tv4-engine
 ```
 
-### Bước 4 — Làm việc, rồi lưu lên
+### Bước 4 — Lấy bản mới nhất trước khi làm
+
+```bash
+git pull origin main
+```
+
+### Bước 5 — Làm việc rồi lưu lên
 
 ```bash
 git add . && git commit -m "TV4: cai dat ham kiem_tra_an_toan" && git push
 ```
 
-### Bước 5 — Tạo pull request
+### Bước 6 — Tạo pull request
 
-Vào GitHub, bấm **Compare & pull request**, gán TV1 duyệt. **Không ai đẩy thẳng vào `main`.**
+Vào GitHub bấm **Compare & pull request**, gán TV1 duyệt. **Không ai đẩy thẳng vào `main`** — repo đã bật ràng buộc chặn.
 
 ---
 
@@ -243,10 +182,12 @@ Vào GitHub, bấm **Compare & pull request**, gán TV1 duyệt. **Không ai đ�
 
 Không cần dùng dòng lệnh. Chọn một trong hai cách:
 
-- **GitHub Desktop** — cài đặt, đăng nhập, kéo file vào rồi bấm nút. Đơn giản nhất nếu bạn nộp file thường xuyên.
-- **Ngay trên web GitHub** — vào đúng thư mục chương của mình, bấm **Add file → Upload files**, kéo file `.docx` vào, gõ mô tả rồi bấm **Commit changes**. Xong.
+- **GitHub Desktop** — cài đặt, đăng nhập, kéo file vào rồi bấm nút.
+- **Ngay trên web GitHub** — đổi nhánh sang nhánh của mình, mở đúng thư mục chương, bấm **Add file → Upload files**, kéo file `.docx` vào, gõ mô tả rồi **Commit changes**.
 
-Cả hai cách đều tính là commit của bạn, miễn là bạn đăng nhập bằng tài khoản của chính mình.
+Cả hai cách đều tính là commit của bạn, miễn là đăng nhập bằng tài khoản của chính mình.
+
+**Đừng nộp bằng file `.zip`.** GitHub không diff được file nén nên không ai review từng dòng hay góp ý được, và `.gitignore` đã chặn sẵn `*.zip`.
 
 ---
 
@@ -266,27 +207,50 @@ TV8: them 5 ca kiem thu bien
 
 ## Quy tắc chung
 
-- Repo để chế độ **private** trong lúc làm.
-- Bật khoá nhánh `main` ở **Settings → Branches** để không ai đẩy thẳng vào.
-- **Không commit video demo** — GitHub chặn file trên 100 MB. Để trên Google Drive rồi dán link vào mục dưới đây.
+- **Không ai đẩy thẳng vào `main`**, tất cả qua pull request. Chỉ TV1 được bấm Merge.
+- **Không tạo nhánh mới** — 8 nhánh đã đủ, repo đang chặn.
+- **Không dùng `git push --force`.** Đây là lệnh duy nhất có thể xoá vĩnh viễn lịch sử. Repo có chặn nhưng đừng tập thói quen đó.
+- **Không commit video demo** — GitHub chặn file trên 100 MB. Để trên Google Drive rồi dán link vào mục cuối README.
+- **Repo đang ở chế độ public.** Nhóm khác đọc được, nên **đừng đẩy quyển báo cáo hoàn chỉnh lên trước khi nộp**. Code và khung thư mục thì công khai không sao.
 - Họp 2 buổi mỗi tuần, biên bản lưu ở `report/bien-ban-hop/`.
 - Hạn nội bộ sớm hơn hạn nộp 3 ngày.
 
 ---
 
-## Chạy chương trình
+## Việc tiếp theo của từng người
 
-```bash
-python -m engine.demo
-```
+**TV2** — Chương 1: 4 điều kiện Coffman, 4 hướng xử lý, phân biệt deadlock / starvation / livelock, bài toán 5 triết gia. Tối thiểu 5 hình tự vẽ, nộp kèm file nguồn `.drawio`.
 
-Kết quả mong đợi với bộ dữ liệu chuẩn: trạng thái **an toàn**, chuỗi `<P1, P3, P4, P2, P0>`.
+**TV5, TV6** — Cài PyQt5 rồi chạy `python -m gui.GUI_TV6` để kiểm tra bằng mắt. Phần còn thiếu: tô sáng hàng tiến trình đang xét trên bảng `Need`, hộp thoại xác nhận khi xoá trắng, và quay video demo 3–5 phút.
 
-Chạy kiểm thử:
+**TV7** — Chương 3. Số liệu đo đã có sẵn trong `scripts/ket_qua_hieu_nang.csv`, chạy lại bằng `python -m scripts.do_hieu_nang`. Kết quả cho thấy **dữ liệu ngẫu nhiên tăng gần tuyến tính, còn trường hợp xấu nhất mới đúng bậc hai** — nêu được điều này là điểm cộng, vì `O(m·n²)` là cận trên chặt chứ không phải mô tả trung bình. Hình đồ thị phân bổ tài nguyên lấy từ phần mềm (`gui/bang_yeu_cau.py`).
 
-```bash
-python -m unittest discover -s tests -v
-```
+**TV8** — Chương 5. 17 ca kiểm thử trong `tests/test_banker.py` đã xanh; bổ sung tối thiểu 5 ca của riêng mình, chạy phần mềm thật và chụp màn hình từng ca. Soạn 15 câu hỏi phản biện cho cả nhóm.
+
+---
+
+## Tài liệu học theo vai trò
+
+### Dùng chung cho cả 8 người
+
+| Tài liệu | Ở đâu |
+|---|---|
+| Kế hoạch phân công đầy đủ | `docs/Phan-cong-De-tai-9-Giai-thuat-Banker.pdf` — **mục 03 là phần ai cũng phải nắm** |
+| Kiến trúc chương trình, 4 biểu đồ | [`docs/kien-truc.md`](docs/kien-truc.md) — GitHub tự vẽ ra hình, chụp màn hình chèn thẳng vào Word |
+| Ảnh đề bài gốc | `docs/de-bai/de-bai-goc.jpg` |
+| Silberschatz — *Operating System Concepts*, chương **Deadlocks** | https://www.os-book.com |
+| Slide bài giảng của thầy | Nguồn sát đề nhất. Nếu ký hiệu khác sách thì **theo slide**, vì thầy chấm theo đó |
+
+### Theo vai trò
+
+- **TV1** — [Pull request](https://docs.github.com/en/pull-requests) · [Vẽ UML](https://app.diagrams.net) · [openpyxl](https://openpyxl.readthedocs.io) · [PyInstaller](https://pyinstaller.org/en/stable/)
+- **TV2** — Silberschatz các mục đầu chương Deadlocks. Bài toán 5 triết gia nằm ở chương **Synchronization**, không phải chương Deadlocks
+- **TV3** — Mã giả đã có sẵn trong chú thích của `engine/banker.py`; kết quả kỳ vọng nằm trong `tests/test_banker.py`
+- **TV4** — [dataclass](https://docs.python.org/3/library/dataclasses.html) · [sao chép sâu](https://docs.python.org/3/library/copy.html) · [unittest](https://docs.python.org/3/library/unittest.html)
+- **TV5** — [PyQt5](https://www.riverbankcomputing.com/static/Docs/PyQt5/) · [QTableWidget](https://doc.qt.io/qt-5/qtablewidget.html) · [JSON](https://docs.python.org/3/library/json.html)
+- **TV6** — [QTimer](https://doc.qt.io/qt-5/qtimer.html) · [QSlider](https://doc.qt.io/qt-5/qslider.html) · lớp `StepLog` chính là cấu trúc cột của bảng nhật ký
+- **TV7** — Silberschatz mục **Resource-Allocation Graph** · phát hiện chu trình trong đồ thị có hướng
+- **TV8** — [unittest](https://docs.python.org/3/library/unittest.html) · [GitHub Issues](https://docs.github.com/en/issues)
 
 ---
 
