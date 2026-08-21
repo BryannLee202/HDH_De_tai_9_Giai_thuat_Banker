@@ -153,3 +153,38 @@ class TestDuLieuKhongHopLe(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+    def test_tc18_p0_giai_phong_giup_p1_chay(self):
+        banker = BankerState(
+            available=[2, 2],
+            max_claim=[[2, 2], [4, 4]],
+            allocation=[[1, 1], [1, 1]],
+        )
+        kq = kiem_tra_an_toan(banker)
+        self.assertTrue(kq.an_toan)
+        self.assertEqual(kq.chuoi, [0, 1])
+
+    def test_tc19_xin_vua_du_bang_available(self):
+        tt = vi_du_chuan()
+        kq = yeu_cau_tai_nguyen(tt, 1, [1, 2, 2])
+        self.assertNotEqual(kq.ket_luan, Verdict.CHO)
+
+    def test_tc20_p1_xin_rong(self):
+        tt = vi_du_chuan()
+        kq = yeu_cau_tai_nguyen(tt, 1, [0, 0, 0])
+        self.assertEqual(kq.ket_luan, Verdict.CAP_PHAT)
+        self.assertEqual(tt.available, [3, 3, 2])
+
+    def test_tc21_allocation_ban_dau_toan_khong(self):
+        banker = BankerState(
+            available=[10, 5, 7],
+            max_claim=[[7, 5, 3], [3, 2, 2]],
+            allocation=[[0, 0, 0], [0, 0, 0]],
+        )
+        kq = kiem_tra_an_toan(banker)
+        self.assertTrue(kq.an_toan)
+
+    def test_tc22_tien_trinh_khong_ton_tai(self):
+        tt = vi_du_chuan()
+        with self.assertRaises(IndexError):
+            yeu_cau_tai_nguyen(tt, 99, [1, 0, 0])
