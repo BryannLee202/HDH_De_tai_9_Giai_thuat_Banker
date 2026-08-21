@@ -25,7 +25,7 @@ Kế hoạch phân công đầy đủ: [`docs/Phan-cong-De-tai-9-Giai-thuat-Bank
 | TV5 |  Trần Đức Tân | Giao diện — nhập liệu và dữ liệu | `tv5-gui-nhap-lieu` | `gui/`, `data/` |
 | TV6 | *Nguyễn Thái* | Giao diện — mô phỏng và trực quan | `tv6-gui-mo-phong` | `gui/` |
 | TV7 | *Văn Hoàng* | Chương so sánh hai giải thuật | `tv7-chuong-so-sanh` | `report/chuong-3-tv7/` |
-| TV8 | Nguyễn Thảo| Kiểm thử · chương kết quả · phản biện | `tv8-kiem-thu` | `tests/`, `report/chuong-5-tv8/` |
+| TV8 | Võ Nguyên Thảo| Kiểm thử · chương kết quả · phản biện | `tv8-kiem-thu` | `tests/`, `report/chuong-5-tv8/` |
 
 ---
 
