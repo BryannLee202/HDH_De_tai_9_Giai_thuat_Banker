@@ -9,7 +9,12 @@ PROJECT_ROOT = os.path.dirname(CURRENT_DIR)
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from core.banker_engine import BankerEngine
+from gui.bang_yeu_cau import BangYeuCauTaiNguyen
+from gui.engine_adapter import (
+    cac_buoc_mo_phong,
+    kiem_tra_du_lieu,
+    tao_trang_thai,
+)
 
 from PyQt5.QtCore import Qt, QTimer, pyqtSignal
 from PyQt5.QtGui import QColor, QFont
@@ -19,11 +24,6 @@ from PyQt5.QtWidgets import (
     QSlider, QSpinBox, QSplitter, QTableWidget,
     QTableWidgetItem, QVBoxLayout, QWidget
 )
-#TV4
-try:
-    from core.banker_engine import BankerEngine
-except ImportError:
-    from banker_engine import BankerEngine
 
 
 #TV5
@@ -406,15 +406,21 @@ class SimulationModule(QWidget):
         self.fetch_steps_from_engine()
 
     def fetch_steps_from_engine(self):
+        """Gọi engine thật ở engine/banker.py qua lớp cầu nối gui/engine_adapter.py.
+
+        Không gọi thẳng engine để nếu sau này engine đổi, chỉ phải sửa một chỗ.
         """
-        GỌI ĐẾN CORE ENGINE CỦA TV4 ĐỂ LẤY CÁC BƯỚC MÔ PHỎNG
-        """
+        self.steps = []
         if not self.dataset:
             return
 
-        # Khởi tạo Engine của TV4 và gọi thuật toán
-        engine = BankerEngine(self.dataset)
-        is_safe, self.steps, safe_seq = engine.run_safety_algorithm()
+        loi = kiem_tra_du_lieu(self.dataset)
+        if loi:
+            QMessageBox.warning(self, "Dữ liệu không hợp lệ", loi)
+            return
+
+        self.trang_thai = tao_trang_thai(self.dataset)
+        self.steps = cac_buoc_mo_phong(self.trang_thai)
 
     def execute_next_step(self):
         if not self.steps:
@@ -502,13 +508,41 @@ class MainWindow(QWidget):
         self.sim_module = SimulationModule()
         splitter.addWidget(self.sim_module)
 
-        splitter.setSizes([550, 730])
+        # Panel yeu cau tai nguyen / giai phong / hoan tac / bieu do (TV6)
+        self.request_module = BangYeuCauTaiNguyen()
+        splitter.addWidget(self.request_module)
+
+        splitter.setSizes([460, 560, 420])
         main_layout.addWidget(splitter)
 
         self.input_module.data_validated.connect(self.sim_module.load_data)
+        self.input_module.data_validated.connect(self.nap_panel_yeu_cau)
+        self.request_module.trang_thai_thay_doi.connect(self.dong_bo_sau_thay_doi)
 
         initial_data = self.input_module.get_current_data()
         self.sim_module.load_data(initial_data)
+        self.nap_panel_yeu_cau(initial_data)
+
+    def nap_panel_yeu_cau(self, dataset):
+        """Nap du lieu vua nhap vao panel yeu cau tai nguyen."""
+        loi = kiem_tra_du_lieu(dataset)
+        if loi:
+            self.request_module.dat_trang_thai(None)
+            return
+        self.request_module.dat_trang_thai(tao_trang_thai(dataset))
+
+    def dong_bo_sau_thay_doi(self, trang_thai):
+        """Sau khi cap phat / giai phong, chay lai mo phong tren trang thai moi."""
+        self.sim_module.dataset = {
+            "n": trang_thai.n,
+            "m": trang_thai.m,
+            "available": list(trang_thai.available),
+            "max": [list(h) for h in trang_thai.max],
+            "allocation": [list(h) for h in trang_thai.allocation],
+            "need": [list(h) for h in trang_thai.need],
+        }
+        self.sim_module.reset_simulation()
+        self.sim_module.fetch_steps_from_engine()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
