@@ -55,7 +55,9 @@ class TestKiemTraAnToan(unittest.TestCase):
     def test_tc01_trang_thai_ban_dau_an_toan(self):
         kq = kiem_tra_an_toan(vi_du_chuan())
         self.assertTrue(kq.an_toan)
-        self.assertEqual(kq.chuoi, [1, 3, 4, 2, 0])
+        # Duyet theo thu tu chi so tang dan, lay tien trinh dau tien thoa man
+        # => <P1, P3, P0, P2, P4>, khop bang chay tay Chuong 2 cua TV3.
+        self.assertEqual(kq.chuoi, [1, 3, 0, 2, 4])
 
     def test_tc01_co_ghi_nhat_ky_tung_buoc(self):
         kq = kiem_tra_an_toan(vi_du_chuan())
