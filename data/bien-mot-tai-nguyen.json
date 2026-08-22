@@ -1,0 +1,34 @@
+{
+  "ten": "Biên: 1 loại tài nguyên",
+  "mo_ta": "Ca biên m=1 để kiểm tra chương trình không lỗi chỉ số mảng.",
+  "n": 3,
+  "m": 1,
+  "ten_tai_nguyen": [
+    "A"
+  ],
+  "available": [
+    2
+  ],
+  "max": [
+    [
+      5
+    ],
+    [
+      3
+    ],
+    [
+      4
+    ]
+  ],
+  "allocation": [
+    [
+      1
+    ],
+    [
+      2
+    ],
+    [
+      1
+    ]
+  ]
+}
