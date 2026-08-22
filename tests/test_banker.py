@@ -55,7 +55,9 @@ class TestKiemTraAnToan(unittest.TestCase):
     def test_tc01_trang_thai_ban_dau_an_toan(self):
         kq = kiem_tra_an_toan(vi_du_chuan())
         self.assertTrue(kq.an_toan)
-        self.assertEqual(kq.chuoi, [1, 3, 4, 2, 0])
+        # Duyet theo thu tu chi so tang dan, lay tien trinh dau tien thoa man
+        # => <P1, P3, P0, P2, P4>, khop bang chay tay Chuong 2 cua TV3.
+        self.assertEqual(kq.chuoi, [1, 3, 0, 2, 4])
 
     def test_tc01_co_ghi_nhat_ky_tung_buoc(self):
         kq = kiem_tra_an_toan(vi_du_chuan())
@@ -149,6 +151,45 @@ class TestDuLieuKhongHopLe(unittest.TestCase):
 
     def test_vi_du_chuan_phai_hop_le(self):
         kiem_tra_hop_le(vi_du_chuan())               # không được ném lỗi
+
+
+class TestCaBoSungTV8(unittest.TestCase):
+    """Các ca kiểm thử bổ sung do TV8 viết thêm."""
+
+    def test_tc18_p0_giai_phong_giup_p1_chay(self):
+        banker = BankerState(
+            available=[2, 2],
+            max=[[2, 2], [4, 4]],
+            allocation=[[1, 1], [1, 1]],
+        )
+        kq = kiem_tra_an_toan(banker)
+        self.assertTrue(kq.an_toan)
+        self.assertEqual(kq.chuoi, [0, 1])
+
+    def test_tc19_xin_vua_du_bang_available(self):
+        tt = vi_du_chuan()
+        kq = yeu_cau_tai_nguyen(tt, 1, [1, 2, 2])
+        self.assertNotEqual(kq.ket_luan, Verdict.CHO)
+
+    def test_tc20_p1_xin_rong(self):
+        tt = vi_du_chuan()
+        kq = yeu_cau_tai_nguyen(tt, 1, [0, 0, 0])
+        self.assertEqual(kq.ket_luan, Verdict.CAP_PHAT)
+        self.assertEqual(tt.available, [3, 3, 2])
+
+    def test_tc21_allocation_ban_dau_toan_khong(self):
+        banker = BankerState(
+            available=[10, 5, 7],
+            max=[[7, 5, 3], [3, 2, 2]],
+            allocation=[[0, 0, 0], [0, 0, 0]],
+        )
+        kq = kiem_tra_an_toan(banker)
+        self.assertTrue(kq.an_toan)
+
+    def test_tc22_tien_trinh_khong_ton_tai(self):
+        tt = vi_du_chuan()
+        with self.assertRaises(LoiDuLieu):
+            yeu_cau_tai_nguyen(tt, 99, [1, 0, 0])
 
 
 if __name__ == "__main__":
