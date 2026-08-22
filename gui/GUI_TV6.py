@@ -63,7 +63,8 @@ class TableInputModule(QWidget):
 
         layout_main.addWidget(QLabel("<b>Bảng Available (Tài nguyên hiện có):</b>"))
         self.grid_available = QTableWidget()
-        self.grid_available.setMaximumHeight(65)
+        self.grid_available.setMinimumHeight(88)
+        self.grid_available.setMaximumHeight(88)
         layout_main.addWidget(self.grid_available)
 
         layout_tables = QHBoxLayout()
@@ -149,6 +150,8 @@ class TableInputModule(QWidget):
             grid.setHorizontalHeaderLabels(headers_col)
             grid.setVerticalHeaderLabels(headers_row)
             grid.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+            grid.horizontalHeader().setMinimumSectionSize(42)
+            grid.verticalHeader().setDefaultSectionSize(30)
 
         for r in range(val_n):
             for c in range(val_m):
@@ -393,9 +396,11 @@ class SimulationModule(QWidget):
         self.log_table = QTableWidget()
         self.log_table.setColumnCount(5)
         self.log_table.setHorizontalHeaderLabels([
-            "Bước", "Tiến trình (Pi)", "Kiểm tra (Need ≤ Work)", "Work mới (Work + Alloc)", "Trạng thái"
+            "Bước", "Tiến trình", "Kiểm tra Need ≤ Work", "Work sau", "Trạng thái"
         ])
         self.log_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.log_table.horizontalHeader().setMinimumSectionSize(70)
+        self.log_table.setWordWrap(False)
         layout_main.addWidget(self.log_table)
 
         self.setLayout(layout_main)
@@ -512,7 +517,7 @@ class MainWindow(QWidget):
         self.request_module = BangYeuCauTaiNguyen()
         splitter.addWidget(self.request_module)
 
-        splitter.setSizes([460, 560, 420])
+        splitter.setSizes([620, 520, 440])
         main_layout.addWidget(splitter)
 
         self.input_module.data_validated.connect(self.sim_module.load_data)
